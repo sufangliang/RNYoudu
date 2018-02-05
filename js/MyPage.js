@@ -15,8 +15,8 @@ import {
 } from 'react-native';
 
 import Constants from '../util/Constants';
+import RNAboutWe from "./RNAboutWe";
 
-const { width } = Dimensions.get('window')
 export default class MyPage extends Component {
     _data = [
         new MyFunClass(require('../res/images/me_bank.png'),'我的银行卡'),
@@ -25,7 +25,7 @@ export default class MyPage extends Component {
     _second_data = [
         new MyFunClass(require('../res/images/me_tool.png'),'邀请好友'),
         new MyFunClass(require('../res/images/me_aboutus.png'),'关于我们'),
-        new MyFunClass(require('../res/images/me_moer_ico.png'),'关于我们'),
+        new MyFunClass(require('../res/images/me_moer_ico.png'),'帮助'),
 
     ]
 
@@ -69,23 +69,18 @@ export default class MyPage extends Component {
         let loginView = null;
         if (!isLoggedIn) {
             loginView =
-                <View style={{flex:1,flexDirection:'column',justifyContent:'center',}}>
-                    <View style={{flexDirection:'row',alignItems:'center',height:50,width:width }}>
-                        <TouchableHighlight style={{ marginLeft: width*0.3, width: 55,height: 20}}>
-                            <Text onPress={() => alert("功能正在开发中")}>请登录</Text>
+                    <View style={{flexDirection:'row',height:50,alignItems:'center',width:260,}}>
+                        <TouchableHighlight style={{borderRadius:18 ,borderColor : '#ffffff',borderWidth:0.5, marginLeft: 0, width: 120,height:36,alignItems:'center',justifyContent:'center'}}>
+                            <Text style={{color:'white'}} onPress={() => alert("功能正在开发中")}>登录</Text>
                         </TouchableHighlight>
-                        <TouchableHighlight style={{width: 55,height: 20}}  >
-                            <Text onPress={() => alert("功能正在开发中")}>     注册</Text>
+                        <TouchableHighlight style={{borderRadius:18 ,borderColor : '#ffffff',borderWidth:0.5,marginLeft:20,width: 120,height: 36,alignItems:'center',justifyContent:'center'}}  >
+                            <Text style = {{color:'white'}}  onPress={() => alert("功能正在开发中")}>注册</Text>
                         </TouchableHighlight>
                     </View>
 
-
-
-
-                </View>
-
         } else {
-            loginView = <View style = {{flex:1,flexDirection:'row',height:80,alignItems:'center',justifyContent:'space-between'}}>
+            loginView =
+                <View style = {{flex:1,flexDirection:'row',height:80,alignItems:'center',justifyContent:'space-between'}}>
                 <TouchableHighlight style={{marginLeft:30}}><Text>{this.state.userData["mobile"]}</Text></TouchableHighlight>
                 <Image style={{marginRight:20,width:22,height:25,resizeMode: Image.resizeMode.contain}} source={require('../res/images/home_banner1.png')}/>
             </View>
@@ -94,10 +89,10 @@ export default class MyPage extends Component {
         return (
             <View style={styles.container}>
                 <ImageBackground source={ require('../res/images/me_banner_bg.png')} style={{width:width,height : 194}} >
-                    <View style={{flex:1,flexDirection:'row',marginTop: 100,height:80,justifyContent:'flex-start'}}>
+                    <View style={{flex:1,flexDirection:'row',marginTop: 80,height:80,justifyContent:'center',color:'red'}}>
                         {loginView}
                     </View>
-                    <View style={{marginTop:55,flexDirection:'row',alignSelf:'center', justifyContent:'space-between',height:50,width:width-100,backgroundColor:'white'}}>
+                    <View style={{marginBottom:-10,flexDirection:'row',borderRadius:6,alignSelf:'center', justifyContent:'space-between',height:50,width:width-100,backgroundColor:'white'}}>
                         <View style={{flexDirection:'column',width:(width-100)/3}} >
                             <Image style={{width:(width-100)/3,height:25,resizeMode: Image.resizeMode.contain,alignItems:'flex-start'}} source={require('../res/images/me_probate_ico_not.png')}/>
                             <TouchableHighlight style={{marginTop:5,alignItems:'center',width:(width-100)/3}}>
@@ -145,8 +140,12 @@ export default class MyPage extends Component {
     }
 
     cellAction = (item) => {
-        if(item.text === "常见问题"){
-            this.props.navigation.navigate('ProblemPage')
+        console.log('关于我们111')
+        if(item.text === "关于我们"){
+            console.log('关于我们')
+            this.props.navigation.navigate('RNAboutWe',{urls:'http://www.baidu.com'});//            this.props.navigation.navigate(('RNAboutWe'),{urls:''})
+            // DeviceEventEmitter.emit('EventReminder', 'http://www.baidu.com');
+
         }else{
             alert("功能正在开发中")
         }
@@ -154,6 +153,7 @@ export default class MyPage extends Component {
 
 
 }
+const { width } = Dimensions.get('window')
 export function MyFunClass(icon,text){
     this.icon=icon;
     this.text=text;

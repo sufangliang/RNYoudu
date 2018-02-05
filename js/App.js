@@ -11,6 +11,8 @@ import { StackNavigator,TabNavigator, CardStackTransitioner} from 'react-navigat
 import HomePage from './HomePage'
 import LoginPage from './LoginPage'
 import CardStackStyleInterpolator from 'react-navigation/src/views/CardStack/CardStackStyleInterpolator'
+import RNAboutWe from "./RNAboutWe";
+import Register from "./Register";
 
 const { width ,height} = Dimensions.get('window')
 
@@ -55,26 +57,39 @@ function navigationOptions(title) {
                 <Text>{title}</Text>
             </View>
         ),
+
     }
 }
 
 
 const setup = StackNavigator({
-
-
+    
     HomePage: {
         screen: HomePage,
         navigationOptions: {
             headerTintColor: "white",
-            headerStyle: {backgroundColor:'white'},
-        }
+            headerStyle: {backgroundColor:'#00aeff',shadowOpacity : 0},
+        },
     },
+
+    RNAboutWe: {
+        screen: RNAboutWe,
+        navigationOptions: navigationOptions("关于我们"),
+        header: null
+    },
+
     LoginPage: {
         screen: LoginPage,
         headerMode: 'none',
         mode: "modal",
         navigationOptions: navigationOptions("登录")
     },
+    Register: {
+        screen: Register,
+        navigationOptions: navigationOptions("注册"),
+        header: null
+    },
+
 
 },{
     transitionConfig:TransitionConfiguration

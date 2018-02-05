@@ -17,7 +17,7 @@ const HomePage = TabNavigator({
                 />
             ),
             headerRight:(
-                <TouchableOpacity onPress={() => alert("功能正在开发中")} >
+                <TouchableOpacity onPress={() => navigation.navigate('RNAboutWe') } >
                     <View style={{marginRight: 10}}>
                         <Image  source={require('../res/images/me_bank.png')}   />
                     </View>
@@ -31,6 +31,7 @@ const HomePage = TabNavigator({
                     </View>
                 </TouchableOpacity>
             ),
+            headerStyle :{shadowOpacity : 0}
 
         },
     },
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
         width: 16,
         height: 16,
     },
+
 });
 
 export default HomePage;
